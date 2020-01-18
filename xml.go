@@ -9,6 +9,14 @@ type QueryResult struct {
 	// Contains the entire API result.
 	XMLName xml.Name `xml:"queryresult"`
 
+	Text string `xml:",chardata"`
+
+	LanguageMsg LanguageMsg `xml:"languagemsg"`
+
+	Tips Tips `xml:"tips"`
+
+	FutureTopic FutureTopic `xml:"futuretopic"`
+
 	// true or false depending on whether the input could be successfully
 	// understood. If false, there will be no <pod> subelements.
 	Success string `xml:"success,attr"`
@@ -16,7 +24,7 @@ type QueryResult struct {
 	// true or false depending on whether a serious processing error occurred,
 	// such as a missing required parameter. If true, there will be no pod
 	// content, just an <error> subelement
-	Error string `xml:"error,attr"`
+	ErrorAttr string `xml:"error,attr"`
 
 	// The number of pods.
 	Numpods  string `xml:"numpods,attr"`
@@ -42,43 +50,90 @@ type QueryResult struct {
 	// A URL to use to recalculate the query and get more pods.
 	Recalculate  string `xml:"recalculate,attr"`
 
-	// Each pod contains a piece or category of information about the given query.
-	Pods []Pod `xml:"pod"`
-}
+	TimedOutPods  string   `xml:"timedoutpods,attr"`
 
-type Pod struct {
-
-	// <pod> elements are the main output of the Full Results API
-	XMLName xml.Name `xml:"pod"`
-
-	// The pod title, used to identify the pod and its contents.
-	Title  string `xml:"title,attr"`
-
-	//true or false depending on whether a serious processing error occurred
-	// with this specific pod. If true, there will be an <error> subelement.
-	Error string `xml:"error,attr"`
-
-	// A number indicating the intended position of the pod in a visual display.
-	// These numbers are typically multiples of 100, and they form an increasing
-	// sequence from top to bottom.
-	Position string `xml:"position,attr"`
-
-	// The name of the scanner that produced this pod. A general guide to the
-	// type of data it holds.
-	Scanner string `xml:"scanner,attr"`
-
-	// A unique identifier for a pod, used for selecting specific pods to include
-	// or exclude.
 	ID string `xml:"id,attr"`
 
-	// The number of subpod elements present.
-	NumSubPods string `xml:"numsubpods,attr"`
+	Host string `xml:"host,attr"`
 
-	// Subelements of <pod> that contain the results for a single subpod.
-	// <subpod> has a title attribute, which is usually an empty string because
-	// most subpods have no title.
-	SubPods []SubPod `xml:"subpod"`
+	Server string `xml:"server,attr"`
+
+	Related string `xml:"related,attr"`
+
+	// Each pod contains a piece or category of information about the given query.
+	Pods []Pod `xml:"pod"`
+
+	Assumptions Assumptions `xml:"assumptions"`
+
+	States States `xml:"states"`
+
+	ExamplePage string `xml:"examplepage"`
+
+	Warnings Warnings `xml:"warnings"`
+
+	Sources Sources `xml:"sources"`
+
+	Generalizaton Generalizaton `xml:"generalization"`
+
+	DidYouMeans DidYouMeans `xml:"didyoumeans"`
+
+	ErrorTag ErrorTag `xml:"error"`
+
+	Sounds Sounds `xml:"sounds"`
 }
 
-type SubPod struct {
+type Generalizaton struct {
+	XMLName xml.Name `xml:"generalization"`
+	Text string `xml:",chardata"`
+	Topic string `xml:"topic,attr"`
+	Desc string `xml:"desc,attr"`
+	Url string `xml:"url,attr"`
+}
+
+type DidYouMeans struct {
+	XMLName xml.Name `xml:"didyoumeans"`
+	Text string `xml:",chardata"`
+	Count string `xml:"count,attr"`
+	DidYouMean []DidYouMean `xml:"didyoumean"`
+}
+
+type DidYouMean struct {
+	XMLName xml.Name `xml:"didyoumean"`
+	Text string `xml:",chardata"`
+	Score string `xml:"score,attr"`
+	Level string `xml:"level,attr"`
+}
+
+type ErrorTag struct {
+	XMLName xml.Name `xml:"error"`
+	Text string `xml:",chardata"`
+	Code string `xml:"code"`
+	Msg string `xml:"msg"`
+}
+
+type LanguageMsg struct {
+	XMLName xml.Name `xml:"languagemsg"`
+	Text string `xml:",chardata"`
+	English string `xml:"english,attr"`
+	Other string `xml:"other,attr"`
+}
+
+type Tips struct {
+	XMLName xml.Name `xml:"tips"`
+	Text string `xml:",chardata"`
+	Count string `xml:"count,attr"`
+	Tip []Tip `xml:"tip"`
+}
+
+type Tip struct {
+	XMLName xml.Name `xml:"tip"`
+	Text string `xml:",chardata"`
+	AttrText string `xml:"text,attr"`
+}
+
+type FutureTopic struct {
+	XMLName xml.Name `xml:"futuretopic"`
+	Text string `xml:",chardata"`
+	Topic string `xml:"topic,attr"`
+	Msg string `xml:"msg,attr"`
 }
