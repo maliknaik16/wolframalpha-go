@@ -2,6 +2,7 @@
 package wolfram
 
 import (
+  "encoding/xml"
   "strconv"
   "strings"
 )
@@ -75,8 +76,8 @@ func (i *Image) IsColorInvertable() bool {
 // Returns the format of the image from the url.
 //
 // Returns the FORMAT_GIF integer constant if the format of the image is 'gif',
-// FORMAT_PNG if the format of the image is 'png', and FORMAT_UNKNOWN any other
-// image formats.
+// FORMAT_PNG if the format of the image is 'png', and FORMAT_UNKNOWN for any
+// other image formats.
 func (i *Image) GetFormat() int {
   url := i.Src
   index := strings.LastIndex(url, "MSPStoreType=image/")
