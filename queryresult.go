@@ -3,6 +3,7 @@ package wolfram
 
 import(
   "encoding/xml"
+  "strconv"
 )
 
 // Struct for the <queryresult> tag.
@@ -13,7 +14,7 @@ type QueryResult struct {
   FutureTopic         *FutureTopic            `xml:"futuretopic,omitempty"`
   Success             string                  `xml:"success,attr"`
   ErrorAttr           string                  `xml:"error,attr"`
-  Numpods             string                  `xml:"numpods,attr"`
+  NumPods             string                  `xml:"numpods,attr"`
   Version             string                  `xml:"version,attr"`
   DataTypes           string                  `xml:"datatypes,attr"`
   Timing              string                  `xml:"timing,attr"`
@@ -38,64 +39,237 @@ type QueryResult struct {
   Sounds              *Sounds                 `xml:"sounds,omitempty"`
 }
 
-// Struct for the <generalization> tag.
-type Generalizaton struct {
-  XMLName             xml.Name                `xml:"generalization,omitempty"`
-  Topic               string                  `xml:"topic,attr"`
-  Desc                string                  `xml:"desc,attr"`
-  Url                 string                  `xml:"url,attr"`
+// The interface for the QueryResult.
+type QueryResulter interface {
+  // Elements
+  GetPods()             []*Pod
+  GetPod(int)           *Pod
+  GetAssumptions()      *Assumptions
+  GetStates()           *States
+  GetExamplePage()      *ExamplePage
+  GetWarnings()         *Warnings
+  GetSources()          *Sources
+  GetGeneralizaton()    *Generalizaton
+  GetDidYouMeans()      *DidYouMeans
+  GetError()            *ErrorTag
+  GetSounds()           *Sounds
+  GetLanguageMsg()      *LanguageMsg
+  GetTips()             *Tips
+  GetFutureTopic()      *FutureTopic
+
+  // Attributes
+  GetSuccess()          bool
+  GetErrorAttr()        bool
+  GetNumPods()          int
+  GetVersion()          string
+  GetDataTypes()        string
+  GetTiming()           float64
+  GetTimedOut()         string
+  GetParseTiming()      float64
+  GetParseTimedOut()    bool
+  GetRecalculate()      string
+  GetTimedOutPods()     string
+  GetId()               string
+  GetHost()             string
+  GetServer()           string
+  GetRelated()          string
 }
 
-// Struct for the <didyoumeans> tag.
-type DidYouMeans struct {
-  XMLName             xml.Name                `xml:"didyoumeans,omitempty"`
-  Count               string                  `xml:"count,attr"`
-  DidYouMean          []*DidYouMean           `xml:"didyoumean,omitempty"`
+// Returns the 'Pod' slice.
+func (q *QueryResult) GetPods() []*Pod {
+  if q.Pods != nil {
+    return q.Pods
+  }
+  return nil
 }
 
-// Struct for the <didyoumean> tag.
-type DidYouMean struct {
-  XMLName             xml.Name                `xml:"didyoumean,omitempty"`
-  Score               string                  `xml:"score,attr"`
-  Level               string                  `xml:"level,attr"`
-  Data                string                  `xml:",chardata"`
+// Returns the 'Pod' at the given index.
+func (q *QueryResult) GetPod(index int) *Pod {
+  if index >= 0 && index > len(q.Pods) - 1 {
+    return nil
+  }
+  return q.Pods[index]
 }
 
-// Struct for the <error> tag.
-type ErrorTag struct {
-  XMLName             xml.Name                `xml:"error,omitempty"`
-  Code                *Code                   `xml:"code,omitempty"`
-  Msg                 *Msg                    `xml:"msg,omitempty"`
+// Returns the 'Assumptions' slice.
+func (q *QueryResult) GetAssumptions() *Assumptions {
+  if q.Assumptions != nil {
+    return q.Assumptions
+  }
+  return nil
 }
 
-// Struct for the <code> tag.
-type Code struct {
-  XMLName             xml.Name                `xml:"code,omitempty"`
-  Code                string                  `xml:",chardata"`
+// Returns the 'States'.
+func (q *QueryResult) GetStates() *States {
+  if q.States != nil {
+    return q.States
+  }
+  return nil
 }
 
-// Struct for the <msg> tag.
-type Msg struct {
-  XMLName             xml.Name                `xml:"msg,omitempty"`
-  Msg                 string                  `xml:",chardata"`
+// Returns the 'ExamplePage'.
+func (q *QueryResult) GetExamplePage() *ExamplePage {
+  if q.ExamplePage != nil {
+    return q.ExamplePage
+  }
+  return nil
 }
 
-// Struct for the <languagemsg> tag.
-type LanguageMsg struct {
-  XMLName             xml.Name                `xml:"languagemsg,omitempty"`
-  English             string                  `xml:"english,attr"`
-  Other               string                  `xml:"other,attr"`
+// Returns the 'Warnings'.
+func (q *QueryResult) GetWarnings() *Warnings {
+  if q.Warnings != nil {
+    return q.Warnings
+  }
+  return nil
 }
 
-// Struct for the <tips> tag.
-type Tips struct {
-  XMLName             xml.Name                `xml:"tips,omitempty"`
-  Count               string                  `xml:"count,attr"`
-  Tip                 []*Tip                  `xml:"tip,omitempty"`
+// Returns the 'Sources'.
+func (q *QueryResult) GetSources() *Sources {
+  if q.Sources != nil {
+    return q.Sources
+  }
+  return nil
 }
 
-// Struct for the <tip> tag.
-type Tip struct {
-  XMLName             xml.Name                `xml:"tip,omitempty"`
-  AttrText            string                  `xml:"text,attr"`
+// Returns the 'Generalizaton'.
+func (q *QueryResult) GetGeneralizaton() *Generalizaton {
+  if q.Generalizaton != nil {
+    return q.Generalizaton
+  }
+  return nil
+}
+
+// Returns the 'DidYouMeans'.
+func (q *QueryResult) GetDidYouMeans() *DidYouMeans {
+  if q.DidYouMeans != nil {
+    return q.DidYouMeans
+  }
+  return nil
+}
+
+// Returns the 'ErrorTag'.
+func (q *QueryResult) GetError() *ErrorTag {
+  if q.ErrorTag != nil {
+    return q.ErrorTag
+  }
+  return nil
+}
+
+// Returns the 'Sounds'.
+func (q *QueryResult) GetSounds() *Sounds {
+  if q.Sounds != nil {
+    return q.Sounds
+  }
+  return nil
+}
+
+// Returns the 'LanguageMsg'.
+func (q *QueryResult) GetLanguageMsg() *LanguageMsg {
+  if q.LanguageMsg != nil {
+    return q.LanguageMsg
+  }
+  return nil
+}
+
+// Returns the 'FutureTopic'.
+func (q *QueryResult) GetFutureTopic() *FutureTopic {
+  if q.FutureTopic != nil {
+    return q.FutureTopic
+  }
+  return nil
+}
+
+// Returns the 'Tips'.
+func (q *QueryResult) GetTips() *Tips {
+  if q.Tips != nil {
+    return q.Tips
+  }
+  return nil
+}
+
+// Returns the attribute value of 'success' from the <queryresult>.
+func (q *QueryResult) GetSuccess() bool {
+  s, _ := strconv.ParseBool(q.Success)
+
+  return s
+}
+
+// Returns the attribute value of 'error' from the <queryresult>.
+func (q *QueryResult) GetErrorAttr() bool {
+  ea, _ := strconv.ParseBool(q.ErrorAttr)
+
+  return ea
+}
+
+// Returns the attribute value of 'numpods' from the <queryresult>.
+func (q *QueryResult) GetNumPods() int {
+  np, _ := strconv.Atoi(q.NumPods)
+
+  return np
+}
+
+// Returns the attribute value of 'version' from the <queryresult>.
+func (q *QueryResult) GetVersion() string {
+  return q.Version
+}
+
+// Returns the attribute value of 'datatypes' from the <queryresult>.
+func (q *QueryResult) GetDataTypes() string {
+  return q.DataTypes
+}
+
+// Returns the attribute value of 'timing' from the <queryresult>.
+func (q *QueryResult) GetTiming() float64 {
+  t, _ := strconv.ParseFloat(q.Timing, 64)
+
+  return t
+}
+
+// Returns the attribute value of 'timedout' from the <queryresult>.
+func (q *QueryResult) GetTimedOut() string {
+  return q.TimedOut
+}
+
+// Returns the attribute value of 'parsetiming' from the <queryresult>.
+func (q *QueryResult) GetParseTiming() float64 {
+  pt, _ := strconv.ParseFloat(q.ParseTiming, 64)
+
+  return pt
+}
+
+// Returns the attribute value of 'parsetimedout' from the <queryresult>.
+func (q *QueryResult) GetParseTimedOut() bool {
+  pto, _ := strconv.ParseBool(q.ParseTimedOut)
+
+  return pto
+}
+
+// Returns the attribute value of 'recalculate' from the <queryresult>.
+func (q *QueryResult) GetRecalculate() string {
+  return q.Recalculate
+}
+
+// Returns the attribute value of 'timedoutpods' from the <queryresult>.
+func (q *QueryResult) GetTimedOutPods() string {
+  return q.TimedOutPods
+}
+
+// Returns the attribute value of 'id' from the <queryresult>.
+func (q *QueryResult) GetId() string {
+  return q.ID
+}
+
+// Returns the attribute value of 'host' from the <queryresult>.
+func (q *QueryResult) GetHost() string {
+  return q.Host
+}
+
+// Returns the attribute value of 'server' from the <queryresult>.
+func (q *QueryResult) GetServer() string {
+  return q.Server
+}
+
+// Returns the attribute value of 'related' from the <queryresult>.
+func (q *QueryResult) GetRelated() string {
+  return q.Related
 }
