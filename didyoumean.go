@@ -2,7 +2,7 @@
 package wolfram
 
 import (
-	"encoding/xml"
+  "encoding/xml"
 )
 
 // Struct for the <didyoumean> tag.
@@ -15,22 +15,22 @@ type DidYouMean struct {
 
 // The interface for the DidYouMean
 type IDidYouMean interface {
-	GetScore()					string
-	GetLevel()					string
-	GetValue()					string
+  GetScore()          string
+  GetLevel()          string
+  GetValue()          string
 }
 
 // Returns the "score" attribute value from the <didyoumean>.
 func (dym *DidYouMean) GetScore() string {
-	return dym.Score
+  return dym.Score
 }
 
 // Returns the "level" attribute value from the <didyoumean>.
 func (dym *DidYouMean) GetLevel() string {
-	return dym.Level
+  return dym.Level
 }
 
 // Returns the value of the <didyoumean>.
 func (dym *DidYouMean) GetValue() string {
-	return dym.Value
+  return dym.Value
 }
