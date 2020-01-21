@@ -20,6 +20,18 @@ type Image struct {
   ColorInvertable       string                `xml:"colorinvertable,attr,omitempty"`
 }
 
+// The interface for the Image.
+type Imager interface {
+	GetSrc() 							string
+	GetAlt() 							string
+	GetTitle() 						string
+	GetDimensions() 			Dimension
+	GetType() 						string
+	GetThemes() 					string
+	IsColorInvertable() 	bool
+	GetFormat() 					int
+}
+
 // The Image format constants
 const (
   FORMAT_UNKNOWN int = 0
@@ -31,6 +43,12 @@ const (
 type Dimension struct {
   Width  int
   Height int
+}
+
+// The interface for the Dimension.
+type IDimension interface {
+	GetWidth()						int
+	GetHeight()						int
 }
 
 // Returns the value of the "src" attribute from <img>.
@@ -103,4 +121,12 @@ func (i *Image) GetFormat() int {
   }
 
   return FORMAT_UNKNOWN
+}
+
+func (d Dimension) GetWidth() int {
+	return d.Width
+}
+
+func (d Dimension) GetHeight() int {
+	return d.Height
 }
