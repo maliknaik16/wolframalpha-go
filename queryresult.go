@@ -33,7 +33,7 @@ type QueryResult struct {
   ExamplePage         *ExamplePage            `xml:"examplepage,omitempty"`
   Warnings            *Warnings               `xml:"warnings,omitempty"`
   Sources             *Sources                `xml:"sources,omitempty"`
-  Generalizaton       *Generalizaton          `xml:"generalization,omitempty"`
+  Generalization      *Generalization          `xml:"generalization,omitempty"`
   DidYouMeans         *DidYouMeans            `xml:"didyoumeans,omitempty"`
   ErrorTag            *ErrorTag               `xml:"error,omitempty"`
   Sounds              *Sounds                 `xml:"sounds,omitempty"`
@@ -49,7 +49,7 @@ type QueryResulter interface {
   GetExamplePage()      *ExamplePage
   GetWarnings()         *Warnings
   GetSources()          *Sources
-  GetGeneralizaton()    *Generalizaton
+  GetGeneralization()   *Generalization
   GetDidYouMeans()      *DidYouMeans
   GetError()            *ErrorTag
   GetSounds()           *Sounds
@@ -131,10 +131,10 @@ func (q *QueryResult) GetSources() *Sources {
   return nil
 }
 
-// Returns the 'Generalizaton'.
-func (q *QueryResult) GetGeneralizaton() *Generalizaton {
-  if q.Generalizaton != nil {
-    return q.Generalizaton
+// Returns the 'Generalization'.
+func (q *QueryResult) GetGeneralization() *Generalization {
+  if q.Generalization != nil {
+    return q.Generalization
   }
   return nil
 }

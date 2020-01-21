@@ -3,6 +3,7 @@ package wolfram
 
 import (
   "encoding/xml"
+  "strconv"
 )
 
 // Struct for the <error> tag.
@@ -38,7 +39,7 @@ func (e *ErrorTag) GetCode() int {
 }
 
 // Returns the error message from the <queryresult>.
-func (e *ErrorTag) GetMsg() *Msg {
+func (e *ErrorTag) GetMsg() string {
   return e.Msg.Msg
 }
 

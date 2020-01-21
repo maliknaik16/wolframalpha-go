@@ -136,7 +136,7 @@ func (a Assumption) GetWords() []string {
 // from the <assumption>.
 func (a Assumption) GetValidities() []bool {
   length := a.GetCount()
-  valids := make([]string, length)
+  valids := make([]bool, length)
 
   for i := 0; i < length; i++ {
     valids[i] = a.GetValue(i).IsValid()
