@@ -72,7 +72,7 @@ func (a *Assumption) GetValue(index int) *Value {
   return nil
 }
 
-// Returns the slice of *Value
+// Returns the slice of pointers to Value.
 func (a *Assumption) GetValues() []*Value {
   if a.Values != nil {
     return a.Values
