@@ -27,7 +27,7 @@ func (a *Assumptions) GetCount() int {
   return c
 }
 
-// Returns the slice of pointers to Assumption.
+// Returns the slice of pointers to `Assumption`.
 func (a *Assumptions) GetAssumptions() []*Assumption {
   if a.Assumptions != nil {
     return a.Assumptions
@@ -36,7 +36,7 @@ func (a *Assumptions) GetAssumptions() []*Assumption {
   return nil
 }
 
-// Returns the pointer to Assumption at the give index.
+// Returns the pointer to `Assumption` at the give index.
 func (a *Assumptions) GetAssumption(index int) *Assumption {
   if index >= 0 && index < len(a.Assumptions) - 1 {
     return a.Assumptions[index]
