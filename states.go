@@ -30,7 +30,7 @@ type StateList struct {
 	States 								[]*State 							`xml:"state,omitempty"`
 }
 
-// Struct for the <states> tag.
+// The interface for the `States`.
 type IStates interface {
 	GetCount() 						int
 	GetStateLists() 			[]*StateList
@@ -39,13 +39,13 @@ type IStates interface {
 	GetState(int) 				*State
 }
 
-// Struct for the <state> tag.
+// The interface for the `State`.
 type IState interface {
 	GetName()  						string
 	GetInput() 						string
 }
 
-// Struct for the <statelist> tag.
+// The interface for the `StateList`.
 type IStateList interface {
 	GetCount()  					int
 	GetValue() 						string
@@ -54,17 +54,19 @@ type IStateList interface {
 	GetState(int) 				*State
 }
 
-
+// Returns the number of <state> elements.
 func (states *States) GetCount() int {
 	c, _ := strconv.Atoi(states.Count)
 
 	return c
 }
 
+// Returns the slice of pointers to `StateList`.
 func (states *States) GetStateLists() []*StateList {
 	return states.StateLists
 }
 
+// Returns the pointer to `StateList` at the given index.
 func (states *States) GetStateList(index int) *StateList {
   if index >= 0 && index < len(states.StateLists) - 1 {
     return states.StateLists[index]
@@ -73,10 +75,12 @@ func (states *States) GetStateList(index int) *StateList {
   return nil
 }
 
+// Returns the slice of pointers to `State`.
 func (states *States) GetStates() []*State {
 	return states.States
 }
 
+// Returns the pointer to `State` at the given index.
 func (states *States) GetState(index int) *State {
   if index >= 0 && index < len(states.States) - 1 {
     return states.States[index]
@@ -85,33 +89,39 @@ func (states *States) GetState(index int) *State {
   return nil
 }
 
-
+// Returns the "name" attribute value from the <state>.
 func (state *State) GetName() string {
 	return state.Name
 }
 
+// Returns the "input" attribute value from the <state>.
 func (state *State) GetInput() string {
 	return state.Input
 }
 
+// Returns the number of <state> elements in <statelist>.
 func (stateList *StateList) GetCount() int {
 	c, _ := strconv.Atoi(statelist.Count)
 
 	return c
 }
 
+// Returns the "value" attribute value from the <statelist>.
 func (stateList *StateList) GetValue() string {
 	return stateList.Value
 }
 
+// Returns the "delimiters" attribute value from the <statelist>.
 func (stateList *StateList) GetDelimiters() string {
 	return stateList.Delimiters
 }
 
+// Returns the slice of pointers to `State`.
 func (stateList *StateList) GetStates() []*State {
 	return stateList.States
 }
 
+// Returns the pointer to `State` at the given index.
 func (stateList *StateList) GetState(index int) *State {
   if index >= 0 && index < len(stateList.States) - 1 {
     return stateList.States[index]
