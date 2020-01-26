@@ -33,7 +33,6 @@ type ISource interface {
   GetText()             string
 }
 
-
 // Returns the number of <source> elements.
 func (sources *Sources) GetCount() int {
   c, _ := strconv.Atoi(sources.Count)
