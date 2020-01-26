@@ -12,7 +12,7 @@ type LanguageMsg struct {
   Other               string                  `xml:"other,attr"`
 }
 
-// The interface for the LanguageMsg.
+// The interface for the `LanguageMsg`.
 type ILanguageMsg interface {
   GetEnglish()        string
   GetOther()          string
