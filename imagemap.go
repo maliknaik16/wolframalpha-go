@@ -24,11 +24,13 @@ type Rect struct {
 	Title 								string 								`xml:"title,attr"`
 }
 
+// The interface for the ImageMap.
 type ImageMaper interface {
 	GetRects()						[]*Rect
 	GetRect(int)					*Rect
 }
 
+// The interface for the Rect.
 type IRect interface {
 	GetLeft()							int
 	GetTop() 							int
@@ -39,54 +41,60 @@ type IRect interface {
 	GetTitle() 						string
 }
 
-func (i *ImageMap) GetRects() []*Rect {
-	return i.Rects
+// Returns the slice of pointers to Rect.
+func (imagemap *ImageMap) GetRects() []*Rect {
+	return imagemap.Rects
 }
 
-func (i *ImageMap) GetRect(index int) *Rect {
-	if index >= 0 && index < len(i.Rects) - 1 {
-		return i.Rects[index]
+// Returns the pointer to the Rect at the given index.
+func (imagemap *ImageMap) GetRect(index int) *Rect {
+	if index >= 0 && index < len(imagemap.Rects) - 1 {
+		return imagemap.Rects[index]
 	}
 
 	return nil
 }
 
-// Rect
-
-
-func (r *Rect) GetLeft() int {
-	l, _ := strconv.Atoi(r.Left)
+// Returns the "left" attribute value from the <rect>.
+func (rect *Rect) GetLeft() int {
+	l, _ := strconv.Atoi(rect.Left)
 
 	return l
 }
 
-func (r *Rect) GetTop() int {
-	t, _ := strconv.Atoi(r.Top)
+// Returns the "top" attribute value from the <rect>.
+func (rect *Rect) GetTop() int {
+	t, _ := strconv.Atoi(rect.Top)
 
 	return t
 }
 
-func (r *Rect) GetRight() int {
-	rt, _ := strconv.Atoi(r.Right)
+// Returns the "right" attribute value from the <rect>.
+func (rect *Rect) GetRight() int {
+	rt, _ := strconv.Atoi(rect.Right)
 
 	return rt
 }
 
-func (r *Rect) GetBottom() int {
-	b, _ := strconv.Atoi(r.Bottom)
+// Returns the "bottom" attribute value from the <rect>.
+func (rect *Rect) GetBottom() int {
+	b, _ := strconv.Atoi(rect.Bottom)
 
 	return b
 }
 
-func (r *Rect) GetQuery() string {
-	return r.Query
+// Returns the "query" attribute value from the <rect>.
+func (rect *Rect) GetQuery() string {
+	return rect.Query
 }
 
-func (r *Rect) GetAssumptions() string {
-	return r.Assumptions
+// Returns the "assumptions" attribute value from the <rect>.
+func (rect *Rect) GetAssumptions() string {
+	return rect.Assumptions
 }
 
-func (r *Rect) GetTitle() string {
-	return r.Title
+// Returns the "title" attribute value from the <rect>.
+func (rect *Rect) GetTitle() string {
+	return rect.Title
 }
 
