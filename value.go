@@ -16,7 +16,7 @@ type Value struct {
   Word                string                  `xml:"word,attr"`
 }
 
-// The interface for the Value.
+// The interface for the `Value`.
 type IValue interface {
   GetName()           string
   GetDescription()    string
