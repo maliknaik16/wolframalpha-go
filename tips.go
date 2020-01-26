@@ -19,14 +19,14 @@ type Tip struct {
   TextAttr            string                  `xml:"text,attr"`
 }
 
-// The interface for the Tips.
+// The interface for the `Tips`.
 type ITips interface {
   GetCount()          int
   GetTips()           []*Tip
   GetTip(int)         *Tip
 }
 
-// The interface for the Tip
+// The interface for the `Tip`.
 type ITip interface {
   GetText()           string
 }
