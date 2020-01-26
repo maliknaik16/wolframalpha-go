@@ -24,13 +24,13 @@ type Rect struct {
 	Title 								string 								`xml:"title,attr"`
 }
 
-// The interface for the ImageMap.
+// The interface for the `ImageMap`.
 type ImageMaper interface {
 	GetRects()						[]*Rect
 	GetRect(int)					*Rect
 }
 
-// The interface for the Rect.
+// The interface for the `Rect`.
 type IRect interface {
 	GetLeft()							int
 	GetTop() 							int
@@ -41,12 +41,12 @@ type IRect interface {
 	GetTitle() 						string
 }
 
-// Returns the slice of pointers to Rect.
+// Returns the slice of pointers to `Rect`.
 func (imagemap *ImageMap) GetRects() []*Rect {
 	return imagemap.Rects
 }
 
-// Returns the pointer to the Rect at the given index.
+// Returns the pointer to the `Rect` at the given index.
 func (imagemap *ImageMap) GetRect(index int) *Rect {
 	if index >= 0 && index < len(imagemap.Rects) - 1 {
 		return imagemap.Rects[index]
