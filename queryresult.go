@@ -75,7 +75,7 @@ type QueryResulter interface {
   GetRelated()          string
 }
 
-// Returns the 'Pod' slice.
+// Returns the slice of pointers to `Pod`.
 func (q *QueryResult) GetPods() []*Pod {
   if q.Pods != nil {
     return q.Pods
@@ -83,7 +83,7 @@ func (q *QueryResult) GetPods() []*Pod {
   return nil
 }
 
-// Returns the 'Pod' at the given index.
+// Returns the pointer to `Pod` at the given index.
 func (q *QueryResult) GetPod(index int) *Pod {
   if index >= 0 && index > len(q.Pods) - 1 {
     return nil
@@ -91,7 +91,7 @@ func (q *QueryResult) GetPod(index int) *Pod {
   return q.Pods[index]
 }
 
-// Returns the 'Assumptions' slice.
+// Returns the pointer to `Assumptions`.
 func (q *QueryResult) GetAssumptions() *Assumptions {
   if q.Assumptions != nil {
     return q.Assumptions
@@ -99,7 +99,7 @@ func (q *QueryResult) GetAssumptions() *Assumptions {
   return nil
 }
 
-// Returns the 'States'.
+// Returns the pointer to `States`.
 func (q *QueryResult) GetStates() *States {
   if q.States != nil {
     return q.States
@@ -107,7 +107,7 @@ func (q *QueryResult) GetStates() *States {
   return nil
 }
 
-// Returns the 'ExamplePage'.
+// Returns the pointer to `ExamplePage`.
 func (q *QueryResult) GetExamplePage() *ExamplePage {
   if q.ExamplePage != nil {
     return q.ExamplePage
@@ -115,7 +115,7 @@ func (q *QueryResult) GetExamplePage() *ExamplePage {
   return nil
 }
 
-// Returns the 'Warnings'.
+// Returns the pointer to `Warnings`.
 func (q *QueryResult) GetWarnings() *Warnings {
   if q.Warnings != nil {
     return q.Warnings
@@ -123,7 +123,7 @@ func (q *QueryResult) GetWarnings() *Warnings {
   return nil
 }
 
-// Returns the 'Sources'.
+// Returns the pointer to `Sources`.
 func (q *QueryResult) GetSources() *Sources {
   if q.Sources != nil {
     return q.Sources
@@ -131,7 +131,7 @@ func (q *QueryResult) GetSources() *Sources {
   return nil
 }
 
-// Returns the 'Generalization'.
+// Returns the pointer to `Generalization`.
 func (q *QueryResult) GetGeneralization() *Generalization {
   if q.Generalization != nil {
     return q.Generalization
@@ -139,7 +139,7 @@ func (q *QueryResult) GetGeneralization() *Generalization {
   return nil
 }
 
-// Returns the 'DidYouMeans'.
+// Returns the pointer to `DidYouMeans`.
 func (q *QueryResult) GetDidYouMeans() *DidYouMeans {
   if q.DidYouMeans != nil {
     return q.DidYouMeans
@@ -147,7 +147,7 @@ func (q *QueryResult) GetDidYouMeans() *DidYouMeans {
   return nil
 }
 
-// Returns the 'ErrorTag'.
+// Returns the pointer to `ErrorTag`.
 func (q *QueryResult) GetError() *ErrorTag {
   if q.ErrorTag != nil {
     return q.ErrorTag
@@ -155,7 +155,7 @@ func (q *QueryResult) GetError() *ErrorTag {
   return nil
 }
 
-// Returns the 'Sounds'.
+// Returns the pointer to `Sounds`.
 func (q *QueryResult) GetSounds() *Sounds {
   if q.Sounds != nil {
     return q.Sounds
@@ -163,7 +163,7 @@ func (q *QueryResult) GetSounds() *Sounds {
   return nil
 }
 
-// Returns the 'LanguageMsg'.
+// Returns the pointer to `LanguageMsg`.
 func (q *QueryResult) GetLanguageMsg() *LanguageMsg {
   if q.LanguageMsg != nil {
     return q.LanguageMsg
@@ -171,7 +171,7 @@ func (q *QueryResult) GetLanguageMsg() *LanguageMsg {
   return nil
 }
 
-// Returns the 'FutureTopic'.
+// Returns the pointer to `FutureTopic`.
 func (q *QueryResult) GetFutureTopic() *FutureTopic {
   if q.FutureTopic != nil {
     return q.FutureTopic
@@ -179,7 +179,7 @@ func (q *QueryResult) GetFutureTopic() *FutureTopic {
   return nil
 }
 
-// Returns the 'Tips'.
+// Returns the pointer to `Tips`.
 func (q *QueryResult) GetTips() *Tips {
   if q.Tips != nil {
     return q.Tips
