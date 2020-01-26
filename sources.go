@@ -2,44 +2,49 @@
 package wolfram
 
 import (
-	"encoding/xml"
-	"strconv"
+  "encoding/xml"
+  "strconv"
 )
 
 // Struct for the <sources> tag.
 type Sources struct {
-	XMLName 							xml.Name 							`xml:"sources,omitempty"`
-	Count 								string 								`xml:"count,attr"`
-	Sources 							[]*Source 						`xml:"source,omitempty"`
+  XMLName               xml.Name              `xml:"sources,omitempty"`
+  Count                 string                `xml:"count,attr"`
+  Sources               []*Source             `xml:"source,omitempty"`
 }
 
 // Struct for the <source> tag.
 type Source struct {
-	XMLName 							xml.Name 							`xml:"source,omitempty"`
-	Url 									string 								`xml:"url,attr"`
-	Text 									string 								`xml:"text,attr"`
+  XMLName               xml.Name              `xml:"source,omitempty"`
+  Url                   string                `xml:"url,attr"`
+  Text                  string                `xml:"text,attr"`
 }
 
+// The interface for the `Sources`.
 type ISources interface {
-	GetCount() 						int
-	GetSources() 					[]*Source
-	GetSource(int)				*Source
+  GetCount()            int
+  GetSources()          []*Source
+  GetSource(int)        *Source
 }
 
+// The interface for the `Source`.
 type ISource interface {
-	GetUrl() 							string
-	GetText() 						string
+  GetUrl()              string
+  GetText()             string
 }
 
 
+// Returns the number of <source> elements.
 func (sources *Sources) GetCount() int {
-	c, _ := strconv.Atoi(sources.Count)
+  c, _ := strconv.Atoi(sources.Count)
 }
 
+// Returns the slice of pointers to `Source`.
 func (sources *Sources) GetSources() []*Source {
-	return sources.Sources
+  return sources.Sources
 }
 
+// Returns the pointer to `Source` at the given index.
 func (sources *Sources) GetSource(int) *Source {
   if index >= 0 && index < len(sources.Sources) - 1 {
     return sources.Sources[index]
@@ -48,11 +53,13 @@ func (sources *Sources) GetSource(int) *Source {
   return nil
 }
 
+// Returns the "url" attribute value from the <source>.
 func (source *Source) GetUrl() string {
-	return source.Url
+  return source.Url
 }
 
+// Returns the "text" attribute value from the <source>.
 func (source *Source) GetText() string {
-	return source.Text
+  return source.Text
 }
 
