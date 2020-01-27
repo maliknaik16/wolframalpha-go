@@ -57,6 +57,7 @@ type Translation struct {
   Text                  string                `xml:"text,attr"`
 }
 
+// The interface for the `Warnings`.
 type IWarnings interface {
   GetCount()            int
   GetReinterpret()      *Reinterpret
@@ -65,28 +66,7 @@ type IWarnings interface {
   GetTranslation()      *Translation
 }
 
-func (w *Warnings) GetCount() int {
-  c, _ := strconv.Atoi(w.Count)
-
-  return c
-}
-
-func (w *Warnings) GetReinterpret() *Reinterpret {
-  return w.Reinterpret
-}
-
-func (w *Warnings) GetSpellCheck() *SpellCheck {
-  return w.SpellCheck
-}
-
-func (w *Warnings) GetDelimiters() *Delimiters {
-  return w.Delimiters
-}
-
-func (w *Warnings) GetTranslation() *Translation {
-  return w.Translation
-}
-
+// The interface for the `Reinterpret`.
 type IReinterpret interface {
   GetText()               string
   GetNew()                string
@@ -96,78 +76,26 @@ type IReinterpret interface {
   GetAlternative(int)     *Alternative
 }
 
-
-func (r *Reinterpret) GetText() string {
-  return r.Text
-}
-
-func (r *Reinterpret) GetNew() string {
-  return r.New
-}
-
-func (r *Reinterpret) GetScore() string {
-  return r.Score
-}
-
-func (r *Reinterpret) GetLevel() string {
-  return r.Level
-}
-
-func (r *Reinterpret) GetAlternatives() []*Alternative {
-  return r.Alternatives
-}
-
-func (r *Reinterpret) GetAlternative(index int) *Alternative {
-  if index >= 0 && index < len(r.Alternatives) {
-    return r.Alternatives[index]
-  }
-  return nil
-}
-
+// The interface for the `Alternative`.
 type IAlternative interface {
   GetScore()              string
   GetLevel()              string
   GetValue()              string
 }
 
-func (a *Alternative) GetScore() string {
-  return a.Score
-}
-
-func (a *Alternative) GetLevel() string {
-  return a.Level
-}
-
-func (a *Alternative) GetValue() string {
-  return a.Value
-}
-
+// The interface for the `SpellCheck`.
 type ISpellCheck interface {
   GetWord()               string
   GetSuggestion()         string
   GetText()               string
 }
 
-func (s *SpellCheck) GetWord() string {
-  return s.Word
-}
-
-func (s *SpellCheck) GetSuggestion() string {
-  return s.Suggestion
-}
-
-func (s *SpellCheck) GetText() string {
-  return s.Text
-}
-
+// The interface for the `Delimiters`.
 type IDelimiters interface {
   GetText()               string
 }
 
-func (d *Delimiters) GetText() string {
-  return d.Text
-}
-
+// The interface for the `Translation`.
 type ITranslation interface {
   GetPhrase()             string
   GetTranslation()        string
@@ -175,18 +103,117 @@ type ITranslation interface {
   GetText()               string
 }
 
+// Returns the number of warnings.
+func (w *Warnings) GetCount() int {
+  c, _ := strconv.Atoi(w.Count)
+
+  return c
+}
+
+// Returns the pointer to `Reinterpret`.
+func (w *Warnings) GetReinterpret() *Reinterpret {
+  return w.Reinterpret
+}
+
+// Returns the pointer to `SpellCheck`.
+func (w *Warnings) GetSpellCheck() *SpellCheck {
+  return w.SpellCheck
+}
+
+// Returns the pointer to `Delimiters`.
+func (w *Warnings) GetDelimiters() *Delimiters {
+  return w.Delimiters
+}
+
+// Returns the pointer to `Translation`.
+func (w *Warnings) GetTranslation() *Translation {
+  return w.Translation
+}
+
+// Returns the "text" attribute value from the <reinterpret>.
+func (r *Reinterpret) GetText() string {
+  return r.Text
+}
+
+// Returns the "new" attribute value from the <reinterpret>.
+func (r *Reinterpret) GetNew() string {
+  return r.New
+}
+
+// Returns the "score" attribute value from the <reinterpret>.
+func (r *Reinterpret) GetScore() string {
+  return r.Score
+}
+
+// Returns the "level" attribute value from the <reinterpret>.
+func (r *Reinterpret) GetLevel() string {
+  return r.Level
+}
+
+// Returns the slice of pointers to `Alternative`.
+func (r *Reinterpret) GetAlternatives() []*Alternative {
+  return r.Alternatives
+}
+
+// Returns the pointer to `Alternative` at the given index.
+func (r *Reinterpret) GetAlternative(index int) *Alternative {
+  if index >= 0 && index < len(r.Alternatives) {
+    return r.Alternatives[index]
+  }
+  return nil
+}
+
+// Returns the "score" attribute value from the <alternative>.
+func (a *Alternative) GetScore() string {
+  return a.Score
+}
+
+// Returns the "level" attribute value from the <alternative>.
+func (a *Alternative) GetLevel() string {
+  return a.Level
+}
+
+// Returns the chardata from <alternative> as string.
+func (a *Alternative) GetValue() string {
+  return a.Value
+}
+
+// Returns the "word" attribute value from the <spellcheck>.
+func (s *SpellCheck) GetWord() string {
+  return s.Word
+}
+
+// Returns the "suggestion" attribute value from the <spellcheck>.
+func (s *SpellCheck) GetSuggestion() string {
+  return s.Suggestion
+}
+
+// Returns the "text" attribute value from the <spellcheck>.
+func (s *SpellCheck) GetText() string {
+  return s.Text
+}
+
+// Returns the "text" attribute value from the <delimiters>.
+func (d *Delimiters) GetText() string {
+  return d.Text
+}
+
+// Returns the "phrase" attribute value from the <translation>.
 func (t *Translation) GetPhrase() string {
   return t.Phrase
 }
 
+// Returns the "trans" attribute value from the <translation>.
 func (t *Translation) GetTranslation() string {
   return t.Trans
 }
 
+// Returns the "lang" attribute value from the <translation>.
 func (t *Translation) GetLanguage() string {
   return t.Lang
 }
 
+// Returns the "text" attribute value from the <translation>.
 func (t *Translation) GetText() string {
   return t.Text
 }
