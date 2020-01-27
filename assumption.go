@@ -63,7 +63,7 @@ func (a *Assumption) GetCurrent() int {
   return current
 }
 
-// Returns the *Value at the given index.
+// Returns the pointer to `Value` at the given index.
 func (a *Assumption) GetValue(index int) *Value {
   if index >= 0 && index < len(a.Values) - 1 {
     return a.Values[index]
@@ -72,7 +72,7 @@ func (a *Assumption) GetValue(index int) *Value {
   return nil
 }
 
-// Returns the slice of pointers to Value.
+// Returns the slice of pointers to `Value`.
 func (a *Assumption) GetValues() []*Value {
   if a.Values != nil {
     return a.Values
