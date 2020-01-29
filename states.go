@@ -101,7 +101,7 @@ func (state *State) GetInput() string {
 
 // Returns the number of <state> elements in <statelist>.
 func (stateList *StateList) GetCount() int {
-  c, _ := strconv.Atoi(statelist.Count)
+  c, _ := strconv.Atoi(stateList.Count)
 
   return c
 }
