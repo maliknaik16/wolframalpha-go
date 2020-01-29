@@ -3,6 +3,7 @@ package wolfram
 
 import (
   "encoding/xml"
+  "strconv"
 )
 
 // Struct for the <pod> tag.
@@ -121,11 +122,6 @@ func (pod *Pod) GetSubPod(index  int) *SubPod {
 // Returns the pointer to `ErrorTag`.
 func (pod *Pod) GetErrorTag() *ErrorTag {
   return pod.ErrorTag
-}
-
-// Returns the slice of pointers to `ExpressionType`.
-func (pod *Pod) GetExpressionTypes() []*ExpressionType {
-  return pod.ExpressionTypes
 }
 
 // Returns the pointer to `States`.
