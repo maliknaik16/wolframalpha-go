@@ -8,7 +8,7 @@ import (
 
 // Tests the GetSrc() method.
 func TestGetSrc(t *testing.T) {
-	img := queryResult.Pods[1].SubPods[0].Image
+	img := queryResult.GetPod(1).SubPods[0].Image
 
 	if url := img.GetSrc(); url == "" {
 		t.Error(fmt.Sprintf("Test Failed: \"%v\" Expected, \"%v\" Received.\n", "", url))
@@ -17,7 +17,7 @@ func TestGetSrc(t *testing.T) {
 
 // Tests the GetAlt() method.
 func TestGetAlt(t *testing.T) {
-	img := queryResult.Pods[0].SubPods[0].Image
+	img := queryResult.GetPod(0).SubPods[0].Image
 	expected := "tides | Seattle, Washington, United States"
 
 	if alt := img.GetAlt(); alt != expected {
