@@ -36,6 +36,8 @@ type ISource interface {
 // Returns the number of <source> elements.
 func (sources *Sources) GetCount() int {
   c, _ := strconv.Atoi(sources.Count)
+
+  return c
 }
 
 // Returns the slice of pointers to `Source`.
@@ -44,7 +46,7 @@ func (sources *Sources) GetSources() []*Source {
 }
 
 // Returns the pointer to `Source` at the given index.
-func (sources *Sources) GetSource(int) *Source {
+func (sources *Sources) GetSource(index int) *Source {
   if index >= 0 && index < len(sources.Sources) - 1 {
     return sources.Sources[index]
   }
